@@ -27,7 +27,7 @@ jobs:
         KEY: ${{secrets.KEY}}
         PORT: ${{secrets.PORT}}
         DOCKER_CON_IMAGE: ${{secrets.DOCKER_CON_IMAGE}}
-       run: |
-            docker pull prabhu27/cicd-pipeline:latest
-            docker rm -f $DOCKER_CON_IMAGE
+       run:
+            docker pull prabhu27/cicd-pipeline:latest &&
+            docker rm -f $DOCKER_CON_IMAGE &&
             docker run -itd --name $DOCKER_CON_IMAGE -p 8008:80 prabhu27/cicd-pipeline:latest

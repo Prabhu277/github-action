@@ -7,7 +7,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - name: Login Dockerhub
+      env:
+        DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
+        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+      run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
     - name: Build a Image CI
       run: docker build -t mywebimage .
-    - name: Deploy a Image to Container CD
-      run: docker run -itd --name mywebapp -p 8008:80 mywebimage
+    - name: Set the docker tag
+      run: docker tag mywebimage prabhu27/cicd-pipeline:latest
+    - name: Deploy to Docker image to docker hub
+      run: docker push prabhu27/cicd-pipeline:latest

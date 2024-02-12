@@ -21,6 +21,7 @@ jobs:
     - name: Deploy to Docker image to docker hub
       run: docker push prabhu27/cicd-pipeline:latest
     - name: Deploy
+      used: prabhu27/ssh-action@origin
       env:
         HOST: ${{secrets.HOST}}
         USERNAME: ${{secrets.USERNAME}}
